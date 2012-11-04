@@ -14,9 +14,12 @@ usage() ->
     io:format("usage: cat filename\n"),
     halt(1).
 
-cat(Filename) ->
+cat([]) ->
+    ok;
+cat([Filename|Others]) ->
     {ok, IoDevice} = file:open(Filename, [read]),
-    line_by_line(IoDevice).
+    line_by_line(IoDevice),
+    cat(Others).
 
 
 line_by_line(IoDevice) ->
