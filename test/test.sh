@@ -28,10 +28,10 @@ printf "cat should print the contents of all the files."
 printf "    "
 assert_equal "$expected" "$result"
 
-expected=`$SYS_CAT -b test.txt`
-result=`$ERL_CAT -b test.txt`
+expected=`$SYS_CAT -n test.txt`
+result=`$ERL_CAT -n test.txt`
 
-printf "cat -b should print the line numbers of a file."
+printf "cat -n should print the line numbers of a file including blank lines."
 printf "    "
 assert_equal "$expected" "$result"
 
