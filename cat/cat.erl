@@ -4,11 +4,6 @@
 main(Args) ->
     {ok, {filenames, Filenames}, {flags, Flags}} = parse_args_caller(Args),
     cat(Filenames, Flags);
-    %try
-    %catch
-        %_:_ ->
-            %usage()
-    %end;
 
 main(_) ->
     usage().
