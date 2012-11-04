@@ -17,12 +17,21 @@ echo
 expected=`$SYS_CAT test.txt`
 result=`$ERL_CAT test.txt`
 
-printf "cat should print the contents of a file...    "
-assert_equal $expected $result
+printf "cat should print the contents of a file."
+printf "    "
+assert_equal "$expected" "$result"
 
 expected=`$SYS_CAT test.txt test2.txt`
 result=`$ERL_CAT test.txt test2.txt`
 
-printf "cat should print the contents of all the files...    "
-assert_equal $expected $result
+printf "cat should print the contents of all the files."
+printf "    "
+assert_equal "$expected" "$result"
+
+expected=`$SYS_CAT -b test.txt`
+result=`$ERL_CAT -b test.txt`
+
+printf "cat -b should print the line numbers of a file."
+printf "    "
+assert_equal "$expected" "$result"
 

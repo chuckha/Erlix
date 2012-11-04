@@ -1,6 +1,8 @@
 #!/usr/bin/env escript
 main(Args) ->
-    io:format("~s", [cat(Args)]);
+    {ok, {filenames, Filenames}, {args, Arguments}} = parse_args_caller(Args),
+    Arguments,
+    cat(Filenames);
     %try
     %catch
         %_:_ ->
@@ -9,6 +11,16 @@ main(Args) ->
 
 main(_) ->
     usage().
+
+parse_args_caller(Args) ->
+    parse_args(Args, [], []).
+
+parse_args(["-b"|Rest], Files, Args) ->
+    parse_args(Rest, Files, ['-b' | Args]);
+parse_args([File|Rest], Files, Args) ->
+    parse_args(Rest, [File | Files], Args);
+parse_args([], Files, Args) ->
+    {ok, {filenames, lists:reverse(Files)}, {args, Args}}.
 
 usage() ->
     io:format("usage: cat filename\n"),
@@ -20,7 +32,6 @@ cat([Filename|Others]) ->
     {ok, IoDevice} = file:open(Filename, [read]),
     line_by_line(IoDevice),
     cat(Others).
-
 
 line_by_line(IoDevice) ->
     case file:read_line(IoDevice) of

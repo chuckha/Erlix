@@ -1,9 +1,9 @@
 #!/bin/sh
 
 assert_equal () {
-        expected=$1
-        result=$2
-        if [ "$expected"="$result" ] && [ -n "$expected" ]
+        expected="$1"
+        result="$2"
+        if [ "$expected" == "$result" ] 
         then
                 echo "OK"
         else
@@ -12,4 +12,4 @@ assert_equal () {
                 echo "     got: $result"
         fi
 }
-export -f assert_equal
+
